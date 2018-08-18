@@ -108,12 +108,17 @@
 				interrupt-parent = <&cpuintc>;
 				interrupts = <2>;
 
-				interrupt-controller;
 				#interrupt-cells = <1>;
-
-				interrupt-map-mask = <0 0 0 1>;
-				interrupt-map = <0 0 0 0 &pcie0 0>;
+				interrupt-map-mask = <0xf800 0 0 0>;
+				interrupt-map = <0x8800 0 0 0 &pci0_intc 1
+					0x9000 0 0 0 &pci0_intc 2>;
 				status = "disabled";
+
+				pci0_intc: interrupt-controller {
+					interrupt-controller;
+					#address-cells = <0>;
+					#interrupt-cells = <1>;
+				};
 			};
 		};
 	};
